@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIF-C01 Quick Revision</title>
+<style>
+:root{--bg:#F8FAFB;--surface:#fff;--ink:#16212B;--muted:#536372;--rule:#D9E1E7;--accent:#0E6377;--accent-soft:#E1F1F4;--exam-bg:#FFF3D6;--exam-ink:#7A4E00;--good:#1B6035;--good-bg:#E4F3E9;--bad:#962B2B;--bad-bg:#FCE8E8;--code-bg:#EEF2F5;
+--ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0F1A22;--surface:#15232D;--ink:#E4ECF1;--muted:#93A6B4;--rule:#2A3B47;--accent:#6CC3D5;--accent-soft:#16323B;--exam-bg:#2D2610;--exam-ink:#F2C66D;--good:#7FD39A;--good-bg:#12301D;--bad:#F29B9B;--bad-bg:#351618;--code-bg:#0B141B}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5}
+header.top{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--rule);padding:.7rem 1rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+header.top h1{font-size:1.05rem;margin:0}
+nav.tabs{display:flex;gap:.4rem}
+nav.tabs button,.btn{font:inherit;font-size:.85rem;border:1px solid var(--rule);background:var(--surface);color:var(--ink);padding:.4rem .8rem;border-radius:6px;cursor:pointer}
+nav.tabs button[aria-selected=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+main{max-width:70rem;margin:0 auto;padding:1rem}
+section.pane{display:none}section.pane.on{display:block}
+h2{font-size:1.25rem;margin:1.6rem 0 .6rem;padding-top:.8rem;border-top:1px solid var(--rule)}
+h2:first-child{border-top:0;margin-top:.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(21rem,1fr));gap:.8rem}
+.box{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.7rem .9rem}
+.box h3{margin:0 0 .4rem;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.box ul{margin:0;padding-left:1.1rem}.box li{margin-bottom:.25rem}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th,td{text-align:left;vertical-align:top;padding:.35rem .5rem;border-bottom:1px solid var(--rule)}
+th{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--accent-soft)}
+td:first-child{font-weight:600;white-space:nowrap}
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:8px;background:var(--surface)}
+.kw{background:var(--exam-bg);border-radius:8px;padding:.6rem .9rem;margin:.6rem 0}
+.kw b{color:var(--exam-ink)}
+code{font-family:var(--mono);font-size:.82em;background:var(--code-bg);padding:.05em .3em;border-radius:3px}
+.mm{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:.5rem;overflow:auto}
+/* quick hits */
+.hb{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:.8rem}
+.hb input[type=search]{font:inherit;font-size:.9rem;padding:.4rem .6rem;border:1px solid var(--rule);border-radius:6px;background:var(--surface);color:var(--ink);min-width:16rem;flex:1}
+.hb label{font-size:.85rem;color:var(--muted)}
+.legend{font-size:.8rem;color:var(--muted);margin:0 0 .6rem}
+.hit{display:grid;grid-template-columns:1.4rem minmax(0,1fr) 1.2rem minmax(0,1fr);gap:.5rem;align-items:baseline;padding:.4rem .6rem;border-bottom:1px solid var(--rule);background:var(--surface)}
+.hit:nth-child(even){background:var(--bg)}
+.hit .s{font-weight:700;text-align:center}
+.hit.c .s{color:var(--good)}
+.hit.p .s{color:var(--exam-ink)}
+.hit .t{color:var(--ink)}
+.hit .arr{color:var(--muted);text-align:center}
+.hit .ans{font-weight:600;color:var(--accent)}
+.hit .ans small{font-weight:400;color:var(--muted)}
+.hgroup{border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-bottom:1rem}
+.hgroup h2{margin:0;padding:.5rem .7rem;font-size:1rem;border:0;background:var(--accent-soft)}
+mark{background:var(--exam-bg);color:inherit;padding:0 .1em}
+@media(max-width:40rem){.hit{grid-template-columns:1.4rem 1fr}.hit .arr{display:none}.hit .ans{grid-column:2}}
+@media print{header.top,.hb,.hint{display:none}section.pane{display:block!important}#pane-mind{display:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>AIF-C01 Quick Revision</h1>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-t="hits">If you see... pick</button>
+    <button role="tab" aria-selected="false" data-t="cheat">Cheat sheet</button>
+    <button role="tab" aria-selected="false" data-t="mind">Mind map</button>
+  </nav>
+  <span style="color:var(--muted);font-size:.8rem">50 scored questions, pass 700/1000. Domains: 20 / 24 / 28 / 14 / 14 %</span>
+</header>
+<main>
+
+<!-- ===================== QUICK HITS ===================== -->
+<section class="pane on" id="pane-hits">
+<div class="hb">
+  <input type="search" id="q" placeholder="Search a keyword, for example 'PII' or 'translation'" aria-label="Search">
+  <label><input type="checkbox" id="only-c"> near-certain only</label>
+  <label>Domain <select id="dom"><option value="all">All</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option value="T">Traps</option></select></label>
+</div>
+<p class="legend"><b style="color:var(--good)">&#9733;</b> near-certain: the keyword maps to this answer almost one to one. <b style="color:var(--exam-ink)">~</b> likely: right in most questions, but read the options. Cover the right side and test yourself.</p>
+<div id="hits"></div>
+</section>
+
+<!-- ===================== CHEAT SHEET ===================== -->
+<section class="pane" id="pane-cheat">
+
+<h2>Domain 1: AI and ML fundamentals (20%)</h2>
+<div class="grid">
+  <div class="box"><h3>Nesting</h3><p style="margin:0">AI contains ML contains deep learning contains GenAI. Agentic AI = GenAI + planning + tools + autonomy.</p></div>
+  <div class="box"><h3>Fit</h3><ul><li><b>Underfit</b> = high bias: poor on train and test.</li><li><b>Overfit</b> = high variance: great on train, poor on new data.</li></ul></div>
+  <div class="box"><h3>Learning types</h3><ul><li>Supervised: labels (classification, regression)</li><li>Unsupervised: no labels (clustering)</li><li>Reinforcement: reward, trial and error (RLHF)</li><li>Self-supervised: LLM pre-training</li></ul></div>
+  <div class="box"><h3>Technique by output</h3><ul><li>Number = regression</li><li>Label = classification</li><li>Group = clustering</li><li>Future values = forecasting</li></ul></div>
+</div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Inference</th><th>Keywords</th></tr>
+<tr><td>Real-time</td><td>Milliseconds, interactive, persistent endpoint</td></tr>
+<tr><td>Serverless</td><td>Sporadic traffic, idle, no infra, cold start</td></tr>
+<tr><td>Asynchronous</td><td>Large payload, long processing, queue, result later</td></tr>
+<tr><td>Batch</td><td>Whole dataset, offline, no latency need, cheapest bulk</td></tr>
+</table></div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Metric</th><th>Formula</th><th>Pick when</th></tr>
+<tr><td>Accuracy</td><td>(TP+TN)/all</td><td>Balanced classes only</td></tr>
+<tr><td>Precision</td><td>TP/(TP+FP)</td><td>False positives costly (spam filter, blocking good customer)</td></tr>
+<tr><td>Recall</td><td>TP/(TP+FN)</td><td>Cannot miss positives (disease, fraud)</td></tr>
+<tr><td>F1</td><td>harmonic mean of P and R</td><td>Need both, or imbalanced data</td></tr>
+<tr><td>AUC-ROC</td><td>area under curve</td><td>Compare models across thresholds</td></tr>
+<tr><td>MAE / RMSE</td><td>error size</td><td>Regression, lower is better</td></tr>
+</table></div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Managed service</th><th>Does</th></tr>
+<tr><td>Rekognition</td><td>Image and video: objects, faces, moderation</td></tr>
+<tr><td>Textract</td><td>Text, tables, forms from scanned documents</td></tr>
+<tr><td>Comprehend</td><td>NLP: sentiment, entities, key phrases, PII</td></tr>
+<tr><td>Transcribe</td><td>Speech to text</td></tr>
+<tr><td>Polly</td><td>Text to speech</td></tr>
+<tr><td>Translate</td><td>Translation</td></tr>
+<tr><td>Lex</td><td>Chatbots and voice bots (intents, slots)</td></tr>
+<tr><td>Personalize</td><td>Recommendations</td></tr>
+<tr><td>SageMaker AI</td><td>Build, train, tune, deploy custom ML</td></tr>
+<tr><td>Bedrock</td><td>Serverless foundation models</td></tr>
+</table></div>
+<div class="kw"><b>Do NOT use ML when:</b> exact guaranteed outcome, fixed formula, no data, cost exceeds benefit. <b>Traditional ML over FM:</b> regulated, must explain, structured data, deterministic, cheap per call.</div>
+<p><b>MLOps:</b> experimentation, repeatable pipelines, scalable systems, technical debt, production readiness, monitoring (data drift, concept drift), retraining. <b>Pipeline:</b> collect, prepare, train, evaluate, deploy, monitor, loop.</p>
+
+<h2>Domain 2: GenAI fundamentals (24%)</h2>
+<div class="grid">
+  <div class="box"><h3>Vocabulary</h3><ul><li><b>Token</b>: unit of processing and billing</li><li><b>Chunking</b>: split docs for retrieval</li><li><b>Embedding / vector</b>: numeric meaning, closeness = similarity</li><li><b>Transformer</b>: LLM architecture (attention)</li><li><b>Diffusion</b>: image generation from noise</li><li><b>Multi-modal</b>: several data types</li></ul></div>
+  <div class="box"><h3>FM lifecycle</h3><p style="margin:0">Data selection, model selection, pre-training, fine-tuning, evaluation, deployment, feedback.</p></div>
+  <div class="box"><h3>Token cost levers</h3><ul><li>Shorter prompts, capped output</li><li>Smaller model</li><li>Prompt caching (repeated prefix)</li><li>Batch (discount, offline)</li><li>Provisioned Throughput (steady heavy load)</li></ul></div>
+  <div class="box"><h3>Agentic terms</h3><ul><li><b>MCP</b>: standard way to connect agents to tools and data</li><li>Short-term vs long-term memory</li><li>Orchestration, supervisor pattern</li><li>Context engineering = everything in the context window</li></ul></div>
+</div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Service</th><th>Pick it for</th></tr>
+<tr><td>Bedrock</td><td>Serverless FMs, Knowledge Bases, Guardrails, no infra</td></tr>
+<tr><td>Nova</td><td>Amazon's own FM family on Bedrock</td></tr>
+<tr><td>SageMaker AI</td><td>Custom training, full control, instance choice</td></tr>
+<tr><td>JumpStart</td><td>Hub of pre-trained and open models (SageMaker side)</td></tr>
+<tr><td>AgentCore</td><td>Run, secure, observe agents in production</td></tr>
+<tr><td>Strands Agents</td><td>Open source SDK to build agents</td></tr>
+<tr><td>Kiro</td><td>AI-assisted developer environment</td></tr>
+<tr><td>Amazon Quick</td><td>Business users: ask questions of company data</td></tr>
+</table></div>
+<div class="kw"><b>GenAI weaknesses:</b> hallucination (RAG, grounding check), inaccuracy, low interpretability, nondeterminism (lower temperature). <b>Metrics:</b> conversion rate, efficiency, ARPU, customer lifetime value, ROI, accuracy.</div>
+
+<h2>Domain 3: Applications of FMs (28%)</h2>
+<div class="tw"><table>
+<tr><th>Parameter</th><th>Low</th><th>High</th></tr>
+<tr><td>Temperature</td><td>Focused, repeatable, factual</td><td>Creative, varied</td></tr>
+<tr><td>Top P</td><td>Narrow word choice</td><td>Wider</td></tr>
+<tr><td>Top K</td><td>Few candidates</td><td>More candidates</td></tr>
+<tr><td>Max tokens</td><td>Short, cheap, may truncate</td><td>Long, costly</td></tr>
+</table></div>
+<p>Parameters change sampling, never the model's knowledge.</p>
+<div class="tw"><table>
+<tr><th>Customization (cheap to costly)</th><th>Use when</th></tr>
+<tr><td>1. Prompting / in-context</td><td>Always try first</td></tr>
+<tr><td>2. RAG</td><td>Current or private facts, citations</td></tr>
+<tr><td>3. Fine-tuning</td><td>Style, format, behavior (labeled pairs)</td></tr>
+<tr><td>3. Distillation</td><td>Smaller, cheaper, faster student of a big teacher</td></tr>
+<tr><td>4. Continued pre-training</td><td>Large unlabeled domain text</td></tr>
+<tr><td>5. Pre-training from scratch</td><td>Almost never</td></tr>
+</table></div>
+<div class="grid" style="margin-top:.8rem">
+  <div class="box"><h3>RAG flow</h3><p style="margin:0">Docs, chunk, embed, vector store. Query: embed question, similarity search, add chunks to prompt, FM answers with citations. Managed by <b>Bedrock Knowledge Bases</b>.</p></div>
+  <div class="box"><h3>Vector stores named</h3><ul><li><b>OpenSearch Service</b>: hybrid search at scale</li><li><b>Aurora / RDS PostgreSQL</b>: pgvector</li><li><b>Neptune</b>: graph, relationships (GraphRAG)</li></ul></div>
+  <div class="box"><h3>Prompting</h3><ul><li>Zero-shot 0 examples, single-shot 1, few-shot several</li><li>Chain-of-thought = step by step reasoning</li><li>Negative prompt = what to avoid</li><li>Prompt Management: variables, versions, rollback</li></ul></div>
+  <div class="box"><h3>Prompt risks</h3><ul><li><b>Exposure</b>: leaks prompt or data</li><li><b>Poisoning</b>: bad source data</li><li><b>Hijacking</b>: injection overrides instructions</li><li><b>Jailbreaking</b>: bypass safety rules</li></ul></div>
+</div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Training term</th><th>Meaning</th></tr>
+<tr><td>Pre-training</td><td>Unlabeled, huge, done by provider</td></tr>
+<tr><td>Fine-tuning / instruction tuning</td><td>Labeled prompt and response pairs</td></tr>
+<tr><td>Continued pre-training</td><td>Unlabeled domain text</td></tr>
+<tr><td>Transfer learning</td><td>Reuse a trained model as the start</td></tr>
+<tr><td>RLHF</td><td>Humans rank outputs, reward model, tune</td></tr>
+<tr><td>Good data</td><td>Curated, governed, labeled well, big enough, representative</td></tr>
+</table></div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Eval metric</th><th>Use for</th></tr>
+<tr><td>ROUGE (recall)</td><td>Summarization</td></tr>
+<tr><td>BLEU (precision)</td><td>Translation</td></tr>
+<tr><td>BERTScore</td><td>Semantic similarity, same meaning different words</td></tr>
+<tr><td>LLM-as-a-judge</td><td>Scalable rubric scoring by a second model</td></tr>
+<tr><td>Bedrock Model Evaluation</td><td>Automatic, judge model, or human evaluation</td></tr>
+</table></div>
+<div class="kw"><b>RAG evaluation:</b> retrieval (right chunks?) and generation (faithful, grounded?). <b>Agents:</b> task completion, tool choice, steps, cost. <b>Business:</b> task completion rate, satisfaction, cost per interaction.</div>
+
+<h2>Domain 4: Responsible AI (14%)</h2>
+<div class="grid">
+  <div class="box"><h3>Features</h3><p style="margin:0">Fairness, bias mitigation, inclusivity, robustness, safety, veracity, privacy, transparency, accountability.</p></div>
+  <div class="box"><h3>Bedrock Guardrails</h3><ul><li>Content filters and prompt attack</li><li>Denied topics, word filters</li><li>Sensitive info (block or mask PII)</li><li>Contextual grounding check</li><li>Automated Reasoning checks</li></ul></div>
+  <div class="box"><h3>Legal risks</h3><p style="margin:0">IP infringement, biased outputs, loss of trust, end-user harm, hallucinations.</p></div>
+  <div class="box"><h3>Find bias</h3><p style="margin:0">Label quality review, subgroup analysis, human audits, ongoing monitoring. Dataset: diverse, curated, balanced.</p></div>
+</div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Transparent</th><th>Opaque</th></tr>
+<tr><td>Linear or logistic regression, decision tree, open models</td><td>Deep networks, closed LLMs</td></tr>
+<tr><td>Auditable, explainable, maybe less accurate</td><td>Accurate, hard to explain</td></tr>
+</table></div>
+<div class="kw"><b>Tools:</b> SageMaker Model Cards (document intended use, data, risks). AWS AI Service Cards. Model Evaluation (toxicity, robustness). <b>Human-centered:</b> disclose AI, show reasons, feedback, human in loop. <b>Trade-offs:</b> interpretability vs performance, transparency vs safety and IP. <b>Green:</b> smallest model that works, reuse models.</div>
+
+<h2>Domain 5: Security, compliance, governance (14%)</h2>
+<div class="tw"><table>
+<tr><th>Need</th><th>Answer</th></tr>
+<tr><td>Who may call models and data</td><td>IAM roles and least privilege</td></tr>
+<tr><td>Encrypt at rest / in transit</td><td>KMS (customer managed key), TLS</td></tr>
+<tr><td>No public internet</td><td>PrivateLink in a VPC</td></tr>
+<tr><td>Find PII in S3</td><td>Macie</td></tr>
+<tr><td>Filter harmful content, mask PII</td><td>Bedrock Guardrails</td></tr>
+<tr><td>Authenticate agents</td><td>AgentCore Identity</td></tr>
+<tr><td>Limit what agents may do</td><td>AgentCore Policy</td></tr>
+<tr><td>Keep secrets</td><td>Secrets Manager</td></tr>
+<tr><td>Who called what</td><td>CloudTrail (API), CloudWatch (logs, metrics)</td></tr>
+<tr><td>Download compliance reports</td><td>Artifact</td></tr>
+<tr><td>Config rules, drift</td><td>Config</td></tr>
+<tr><td>Software vulnerabilities</td><td>Inspector</td></tr>
+<tr><td>Best-practice checks</td><td>Trusted Advisor</td></tr>
+<tr><td>Design review</td><td>Well-Architected Tool</td></tr>
+</table></div>
+<div class="grid" style="margin-top:.8rem">
+  <div class="box"><h3>Shared responsibility</h3><p style="margin:0">AWS secures the cloud and the managed service. You secure access, data, prompts, config. More self-managed = more yours.</p></div>
+  <div class="box"><h3>Origins</h3><p style="margin:0">Data lineage, data catalog (Glue Data Catalog), Model Cards, source citations from RAG.</p></div>
+  <div class="box"><h3>Hallucination controls</h3><p style="margin:0">RAG grounding, contextual grounding check, Automated Reasoning, output validation, confidence scoring, citations, human review.</p></div>
+  <div class="box"><h3>Data governance</h3><p style="margin:0">Lifecycle, logging, residency, monitoring, retention. S3 lifecycle, Region choice, log retention.</p></div>
+</div>
+<div class="tw" style="margin-top:.8rem"><table>
+<tr><th>Scoping Matrix scope</th><th>Example</th></tr>
+<tr><td>1 Consumer app</td><td>Public chatbot site</td></tr>
+<tr><td>2 Enterprise app</td><td>SaaS with built-in AI</td></tr>
+<tr><td>3 Pre-trained model</td><td>Your app calling Bedrock</td></tr>
+<tr><td>4 Fine-tuned model</td><td>Customized with your data</td></tr>
+<tr><td>5 Self-trained model</td><td>Built from scratch</td></tr>
+</table></div>
+<div class="kw"><b>Out of scope (distractors):</b> GuardDuty, Security Hub, WAF, Cognito, Detective, Shield, CloudHSM, X-Ray, Route 53, Control Tower. <b>Watch:</b> Guardrails masks the response but invocation logs may keep the original, so encrypt logs and restrict access.</div>
+</section>
+
+<!-- ===================== MIND MAP ===================== -->
+<section class="pane" id="pane-mind">
+<p class="hint" style="text-align:left">One map per domain. Needs an internet connection for the diagram library.</p>
+<h2>Whole exam</h2>
+<div class="mm"><pre class="mermaid">
+mindmap
+  root((AIF-C01))
+    D1 AI and ML 20 percent
+      Terms and nesting
+      Inference types
+      Learning types
+      Use cases and services
+      Lifecycle and MLOps
+      Metrics
+    D2 GenAI 24 percent
+      Concepts and agents
+      Strengths and limits
+      AWS services and cost
+    D3 FM applications 28 percent
+      Selection and parameters
+      RAG and vector stores
+      Prompting
+      Fine-tuning
+      Evaluation
+    D4 Responsible AI 14 percent
+      Fairness and bias
+      Guardrails
+      Transparency
+    D5 Security and governance 14 percent
+      Secure AI
+      Compliance and governance
+</pre></div>
+<h2>Domain 1</h2>
+<div class="mm"><pre class="mermaid">
+mindmap
+  root((D1))
+    Inference
+      Real-time
+      Serverless
+      Asynchronous
+      Batch
+    Learning
+      Supervised
+      Unsupervised
+      Reinforcement
+    Technique
+      Regression number
+      Classification label
+      Clustering group
+    Services
+      Rekognition
+      Textract
+      Comprehend
+      Transcribe
+      Polly
+      Translate
+      Lex
+      Personalize
+    Metrics
+      Precision
+      Recall
+      F1
+      Accuracy
+    MLOps
+      Monitor drift
+      Retrain
+</pre></div>
+<h2>Domains 2 and 3</h2>
+<div class="mm"><pre class="mermaid">
+mindmap
+  root((GenAI and FMs))
+    Concepts
+      Token
+      Embedding
+      Transformer
+      Diffusion
+      MCP
+    Services
+      Bedrock
+      SageMaker AI
+      JumpStart
+      AgentCore
+      Strands
+      Kiro
+      Quick
+    Pricing
+      On-demand
+      Batch
+      Provisioned Throughput
+    Parameters
+      Temperature
+      Top P
+      Top K
+      Max tokens
+    Customization
+      Prompting
+      RAG
+      Fine-tuning
+      Distillation
+      Pre-training
+    Vector stores
+      OpenSearch
+      Aurora and RDS
+      Neptune
+    Prompt risks
+      Exposure
+      Poisoning
+      Hijacking
+      Jailbreaking
+    Evaluation
+      ROUGE summary
+      BLEU translation
+      BERTScore meaning
+      LLM judge
+</pre></div>
+<h2>Domains 4 and 5</h2>
+<div class="mm"><pre class="mermaid">
+mindmap
+  root((Responsible and Secure))
+    Responsible
+      Fairness
+      Robustness
+      Veracity
+      Bias vs variance
+      Guardrails
+      Model Cards
+    Security
+      IAM
+      KMS
+      PrivateLink
+      Macie
+      CloudTrail
+      AgentCore Identity and Policy
+    Governance
+      Artifact
+      Config
+      Inspector
+      Trusted Advisor
+      Scoping Matrix
+</pre></div>
+</section>
+
+</main>
+
+<script>
+(function(){
+/* [domain, strength c=near-certain p=likely, trigger, answer] */
+var R=[
+// ---------- Domain 1
+["1","c","Labeled data, historical data with known outcomes","Supervised learning"],
+["1","c","No labels, discover groups or segments","Unsupervised (clustering)"],
+["1","c","Reward, environment, trial and error","Reinforcement learning"],
+["1","p","How LLMs are pre-trained","Self-supervised (next token), not plain supervised"],
+["1","c","Predict a number (price, demand, time)","Regression"],
+["1","c","Predict a category (spam, fraud yes/no, churn)","Classification"],
+["1","c","Predict future values over time","Forecasting (time-series)"],
+["1","c","Milliseconds, interactive, user waiting","Real-time inference"],
+["1","c","Large payload, long processing, queue, result later","Asynchronous inference"],
+["1","c","Whole dataset, offline, no immediate response","Batch inference / batch transform"],
+["1","c","Infrequent or idle traffic, no infrastructure to manage","Serverless inference"],
+["1","c","Cannot afford to MISS positives (disease, fraud)","Recall"],
+["1","c","Cannot afford FALSE ALARMS (blocking good customers)","Precision"],
+["1","c","Imbalanced classes, need one balanced number","F1 score (not accuracy)"],
+["1","c","Great on training data, poor on new data","Overfitting = high variance"],
+["1","c","Poor on training AND new data","Underfitting = high bias"],
+["1","c","Exact guaranteed outcome, fixed formula","Do NOT use ML, write code"],
+["1","p","Must explain every decision, structured table, regulated","Traditional interpretable ML, not an FM"],
+["1","c","Scanned forms, invoices, extract tables","Amazon Textract"],
+["1","c","Sentiment, entities, key phrases, classify text","Amazon Comprehend"],
+["1","c","Speech to text, transcribe calls","Amazon Transcribe"],
+["1","c","Text to speech, lifelike voice","Amazon Polly"],
+["1","c","Translate or localize text","Amazon Translate"],
+["1","c","Chatbot or voice bot with intents and slots","Amazon Lex"],
+["1","c","Recommend products, personalization","Amazon Personalize"],
+["1","c","Detect objects, faces, unsafe images or video","Amazon Rekognition"],
+["1","c","Custom model, data scientists, full control, train and deploy","Amazon SageMaker AI"],
+["1","c","Model accuracy drops months after launch","Monitor for drift, then retrain (MLOps)"],
+["1","c","Justify spend, cost per user, customer feedback","Business metrics (ROI), not just F1"],
+["1","c","Fastest to adopt, no servers to run a model","Managed API (Bedrock), not self-hosted"],
+["1","c","Full control of instance and container","Self-hosted (SageMaker endpoint, EC2, ECS, EKS)"],
+// ---------- Domain 2
+["2","c","Search by meaning, similar text","Embeddings in a vector store"],
+["2","c","Generate an image from a text prompt","Diffusion model"],
+["2","c","Text plus image input or output","Multi-modal model"],
+["2","c","Splitting documents before embedding","Chunking"],
+["2","c","Bill grows with long prompts, history, retrieved docs","Input tokens (priced separately from output)"],
+["2","c","Same long prefix sent on every call, cut cost","Prompt caching"],
+["2","c","Bulk offline job, cheaper, no latency need","Batch inference (discounted)"],
+["2","c","Steady, high, predictable volume, consistent throughput","Provisioned Throughput"],
+["2","p","Variable or unpredictable traffic, experiments","On-demand (per token)"],
+["2","p","Customized model on Bedrock must be served","Provisioned Throughput"],
+["2","c","Standard way to connect agents to tools and data","MCP (Model Context Protocol)"],
+["2","c","Remember the user across sessions","Long-term memory"],
+["2","c","Several specialized agents coordinated by one","Multi-agent, supervisor pattern"],
+["2","c","Everything placed in the context window","Context engineering"],
+["2","c","Confident but false output","Hallucination, fix with RAG and grounding"],
+["2","c","Same prompt, different answers","Nondeterminism, lower temperature"],
+["2","c","Cannot explain why it answered that way","Interpretability limitation"],
+["2","c","Business goal: increase purchases","Conversion rate"],
+["2","c","Business goal: time saved per task","Efficiency"],
+["2","c","Business goal: revenue per user / long-term value","ARPU / customer lifetime value"],
+["2","c","Business goal: justify the project cost","ROI"],
+["2","c","Serverless foundation models, no infrastructure, quickest path","Amazon Bedrock"],
+["2","c","Amazon's own foundation models","Amazon Nova (on Bedrock)"],
+["2","c","Train or fine-tune own model, choose instances","SageMaker AI"],
+["2","c","Hub of pre-trained and open models to deploy or tune","SageMaker JumpStart"],
+["2","c","Run, secure, observe agents in production","Amazon Bedrock AgentCore"],
+["2","c","Open source SDK to write agents","Strands Agents"],
+["2","c","AI helps developers write software","Kiro"],
+["2","c","Business users ask questions of company data, dashboards","Amazon Quick"],
+// ---------- Domain 3
+["3","c","Consistent, factual, repeatable output","Low temperature"],
+["3","c","Creative, varied output","High temperature"],
+["3","p","Temperature adds knowledge","False. It changes randomness only"],
+["3","c","Cap answer length and cost","Max tokens (can truncate)"],
+["3","c","Answer from our own current documents, no retraining, citations","RAG with Bedrock Knowledge Bases"],
+["3","c","Vectors next to relational data already in PostgreSQL","Aurora or RDS for PostgreSQL (pgvector)"],
+["3","c","Relationships between entities, graph","Amazon Neptune"],
+["3","c","Hybrid keyword plus vector search at scale","Amazon OpenSearch Service"],
+["3","c","Cheapest way to give a model company knowledge","RAG, not fine-tuning"],
+["3","c","Change tone, format or task behavior","Fine-tuning"],
+["3","c","Smaller, faster, cheaper but still accurate","Distillation"],
+["3","c","Large pile of UNLABELED domain text","Continued pre-training"],
+["3","c","Labeled prompt and response pairs","Fine-tuning (instruction tuning)"],
+["3","c","Humans rank outputs to improve the model","RLHF"],
+["3","p","Train a brand new model from scratch","Almost never the right answer"],
+["3","c","Multi-step task, call APIs, take actions","AI agent"],
+["3","c","0 / 1 / several examples in the prompt","Zero-shot / single-shot / few-shot"],
+["3","c","Think step by step, show reasoning","Chain-of-thought"],
+["3","c","Ignore previous instructions, attacker overrides rules","Hijacking (prompt injection). Guardrails prompt attack filter"],
+["3","c","Role-play trick to bypass safety rules","Jailbreaking"],
+["3","c","Model leaks system prompt or customer data","Exposure"],
+["3","c","Corrupted or malicious source data","Poisoning"],
+["3","c","Version, reuse, roll back prompts","Bedrock Prompt Management"],
+["3","c","Summarization quality vs reference","ROUGE"],
+["3","c","Translation quality vs reference","BLEU"],
+["3","c","Same meaning, different words","BERTScore"],
+["3","c","Score outputs at scale with a second model","LLM-as-a-judge"],
+["3","c","Compare models on your data (auto, judge or human)","Bedrock Model Evaluation"],
+["3","c","Right chunk retrieved but answer contradicts it","Generation faithfulness problem"],
+["3","c","Wrong chunks retrieved","Retrieval problem (chunking, embeddings)"],
+["3","c","Does the app meet business goals?","Task completion, satisfaction, cost per interaction"],
+["3","p","Pick the model","Match modality, cost, latency, languages, context length, customization support"],
+// ---------- Domain 4
+["4","c","Block topics, filter harmful content, mask PII, enforced outside the prompt","Amazon Bedrock Guardrails"],
+["4","c","Detect answers not backed by the source","Guardrails contextual grounding check"],
+["4","c","Verify answers against logical rules","Guardrails Automated Reasoning checks"],
+["4","c","Overall accuracy hides a weaker group","Subgroup analysis"],
+["4","c","Document intended use, training data, risks of a model","SageMaker Model Cards"],
+["4","c","Must explain decisions to applicants or auditors","Interpretable model (regression, tree)"],
+["4","c","Disclose AI use, show reasons, feedback, human in loop","Human-centered design"],
+["4","c","Environmental or sustainability concern","Smallest model that works, reuse or distill"],
+["4","c","Copyright, biased output, lost trust, end-user harm","Legal risks of GenAI"],
+["4","c","Good dataset","Diverse, curated, balanced, well labeled, representative"],
+["4","c","Model worse for one demographic","Unrepresentative data. Check data and subgroup metrics"],
+["4","p","Transparency vs safety","Real trade-off: openness can aid attackers"],
+["4","p","Word 'bias' in a statistics question","Underfitting. In a fairness question it means skew against groups"],
+// ---------- Domain 5
+["5","c","Reach Bedrock without the public internet","AWS PrivateLink (VPC endpoint)"],
+["5","c","Find PII in S3","Amazon Macie"],
+["5","c","Who called the API and when","AWS CloudTrail"],
+["5","c","Metrics, logs, alarms","Amazon CloudWatch"],
+["5","c","Encrypt with our own key","AWS KMS customer managed key"],
+["5","c","Who may invoke which model, least privilege","IAM roles and policies"],
+["5","c","Store API keys and credentials","AWS Secrets Manager"],
+["5","c","Authenticate an agent, act on behalf of a user","AgentCore Identity"],
+["5","c","Limit what an agent may do","Policy in AgentCore"],
+["5","c","Download AWS compliance reports","AWS Artifact"],
+["5","c","Configuration drift, noncompliant settings, rules","AWS Config"],
+["5","c","Software vulnerabilities (EC2, containers, Lambda)","Amazon Inspector"],
+["5","c","Best-practice recommendations across cost, security, limits","AWS Trusted Advisor"],
+["5","c","Review workload design against best practices","AWS Well-Architected Tool"],
+["5","c","Trace where data came from","Data lineage, data catalog, Model Cards"],
+["5","c","Reduce hallucination","RAG grounding, Guardrails grounding check, citations, human review"],
+["5","c","Who secures what","AWS secures the cloud and service. You secure data, access, config"],
+["5","c","Scoping Matrix: public chatbot website","Scope 1 consumer app"],
+["5","c","Scoping Matrix: SaaS with built-in AI","Scope 2 enterprise app"],
+["5","c","Scoping Matrix: your app calling Bedrock","Scope 3 pre-trained model"],
+["5","c","Scoping Matrix: fine-tune with your data","Scope 4 fine-tuned model"],
+["5","c","Scoping Matrix: train from scratch","Scope 5 self-trained model"],
+["5","p","Data governance words","Lifecycle, logging, residency, monitoring, retention"],
+["5","p","Guardrails masked the PII, is it safe?","Not in logs. Encrypt and restrict invocation logs"],
+// ---------- Traps
+["T","c","GuardDuty, Security Hub, WAF, Shield, Detective","Out of scope. Wrong answer"],
+["T","c","Cognito, CloudHSM, Directory Service, X-Ray","Out of scope. Wrong answer"],
+["T","c","Route 53, Direct Connect, Global Accelerator","Out of scope. Wrong answer"],
+["T","p","'Train a bigger model' or 'fine-tune' to add current facts","Wrong. RAG"],
+["T","p","'Raise temperature' to fix accuracy","Wrong. It adds randomness"],
+["T","p","Prompt wording alone for enforcement","Wrong. Use Guardrails"],
+["T","p","Provisioned Throughput for spiky traffic","Wrong. On-demand"],
+["T","p","Accuracy as the metric on imbalanced data","Wrong. F1, recall or precision"],
+["T","p","Pre-train from scratch","Wrong unless the question says unlimited budget and data"],
+["T","p","Transcribe vs Polly, Textract vs Comprehend","Audio to text vs text to audio. Read documents vs understand text"],
+["T","p","Two answers needed (select TWO)","Often a pair that chains: Textract then Comprehend, PrivateLink and CloudTrail, RAG and grounding check"]
+];
+var NAMES={"1":"Domain 1: AI and ML fundamentals (20%)","2":"Domain 2: GenAI fundamentals (24%)","3":"Domain 3: FM applications (28%)","4":"Domain 4: Responsible AI (14%)","5":"Domain 5: Security and governance (14%)","T":"Traps and distractors"};
+var $=function(id){return document.getElementById(id)};
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function hl(s,q){s=esc(s);if(!q)return s;var e=q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");return s.replace(new RegExp("("+esc(e)+")","ig"),"<mark>$1</mark>")}
+function render(){
+  var q=$("q").value.trim(),only=$("only-c").checked,d=$("dom").value,out="",n=0;
+  ["1","2","3","4","5","T"].forEach(function(g){
+    if(d!=="all"&&d!==g)return;
+    var rows="";
+    R.forEach(function(r){
+      if(r[0]!==g)return;
+      if(only&&r[1]!=="c")return;
+      if(q&&(r[2]+" "+r[3]).toLowerCase().indexOf(q.toLowerCase())<0)return;
+      n++;
+      rows+='<div class="hit '+r[1]+'"><span class="s" title="'+(r[1]==="c"?"near-certain":"likely")+'">'+(r[1]==="c"?"★":"~")+'</span><span class="t">'+hl(r[2],q)+'</span><span class="arr">→</span><span class="ans">'+hl(r[3],q)+'</span></div>';
+    });
+    if(rows)out+='<div class="hgroup"><h2>'+NAMES[g]+'</h2>'+rows+'</div>';
+  });
+  $("hits").innerHTML=out||'<p class="hint">Nothing matches.</p>';
+}
+["q","only-c","dom"].forEach(function(id){$(id).addEventListener("input",render);$(id).addEventListener("change",render)});
+render();
+var KEY="aif-c01-rev";
+var tabs=document.querySelectorAll("nav.tabs button");
+function show(t){
+  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.t===t?"true":"false")});
+  ["hits","cheat","mind"].forEach(function(p){$("pane-"+p).classList.toggle("on",p===t)});
+  try{localStorage.setItem(KEY+"-tab",t)}catch(e){}
+  if(t==="mind"&&window.__mmRun)window.__mmRun();
+}
+tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.t)})});
+try{var st=localStorage.getItem(KEY+"-tab");if(st&&["hits","cheat","mind"].indexOf(st)>=0)show(st)}catch(e){}
+})();
+
+</script>
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs";
+const dark=window.matchMedia("(prefers-color-scheme: dark)").matches;
+mermaid.initialize({startOnLoad:false,theme:dark?"dark":"default",securityLevel:"loose"});
+let done=false;
+window.__mmRun=async()=>{if(done)return;done=true;await mermaid.run({querySelector:".mermaid"})};
+if(document.getElementById("pane-mind").classList.contains("on"))window.__mmRun();
+</script>
+</body>
+</html>
