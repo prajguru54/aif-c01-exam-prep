@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Local environment variables and credentials; never commit
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Local agent scratch
+.local/
+.claude/settings.local.json
